@@ -73,7 +73,7 @@ app.post('/api/thankyou', async (req, res) => {
     from: process.env.SMTP_USER, // Your email as sender
     to: email, // User's email
     subject: 'Thank you for reaching out!',
-    text: `Dear ${name},\n\nThank you for contacting me. I have received your message and will get back to you shortly.\n\nThanks & Regards,\nShreyas mohite`,
+    text: `Dear ${name},\n\nThank you for contacting me. I have received your message and will get back to you shortly.\n\nThanks & Regards,\nShreyas Mohite`,
   };
 
   try {
@@ -86,7 +86,12 @@ app.post('/api/thankyou', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Only start the server if not running in a Vercel environment
+if (!process.env.VERCEL) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+export default app;
